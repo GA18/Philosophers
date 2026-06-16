@@ -6,7 +6,7 @@
 /*   By: g-alves- <g-alves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 12:30:04 by g-alves-          #+#    #+#             */
-/*   Updated: 2026/06/16 18:31:05 by g-alves-         ###   ########.fr       */
+/*   Updated: 2026/06/16 18:38:25 by g-alves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,5 @@ int	thinking(t_philo *philo)
 	printf("Philosopher [%i] in timestemp [%ld] is thinking",
 		philo->id, get_now(&philo->data->time_value));
 	pthread_mutex_unlock(&philo->data->action_lock);
+	return (0);
 }

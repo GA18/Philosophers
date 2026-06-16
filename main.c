@@ -6,7 +6,7 @@
 /*   By: g-alves- <g-alves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 16:50:03 by g-alves-          #+#    #+#             */
-/*   Updated: 2026/06/16 18:27:17 by g-alves-         ###   ########.fr       */
+/*   Updated: 2026/06/16 18:46:27 by g-alves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	check_simulation(t_data *data)
 		id = 0;
 		while (id < data->number_of_philosophers)
 		{
-			if (philo_died(data, id))
+			if (philo_died(data, id) || is_satisfied(data))
 			{
 				pthread_mutex_lock(&data->action_lock);
 				printf("%ld, %i, died\n",
@@ -76,7 +76,14 @@ t_bool	philo_died(t_data *data, int id)
 	long	time_now;
 
 	time_now = get_now(&data->time_value);
-	if ((time_now - data->philos[id].last_eat) > data->time_to_eat)
+	if ((time_now - data->philos[id].last_eat) > data->time_to_die)
+		return (TRUE);
+	return (FALSE);
+}
+
+t_bool	is_satisfied(t_data *data)
+{
+	if (data->philos[data->philos->id].count_eat == data->must_eat)
 		return (TRUE);
 	return (FALSE);
 }
