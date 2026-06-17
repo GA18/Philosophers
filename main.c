@@ -6,7 +6,7 @@
 /*   By: g-alves- <g-alves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 16:50:03 by g-alves-          #+#    #+#             */
-/*   Updated: 2026/06/17 09:14:24 by g-alves-         ###   ########.fr       */
+/*   Updated: 2026/06/17 11:09:47 by g-alves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,8 @@ void	check_simulation(t_data *data)
 			pthread_mutex_lock(&data->action_lock);
 			if (philo_died(data, id))
 			{
-				pthread_mutex_lock(&data->action_lock);
-				printf("%ld, %i, died\n",
-					get_now(&data->time_value) - data->start_time, id);
+				printf("%ld %i died\n",
+					get_now() - data->start_time, id);
 				data->end_simulation = TRUE;
 				pthread_mutex_unlock(&data->action_lock);
 				break ;
@@ -71,7 +70,7 @@ void	check_simulation(t_data *data)
 			id++;
 			pthread_mutex_unlock(&data->action_lock);
 		}
-		usleep(500);
+		ft_usleep(10);
 	}
 }
 
@@ -79,7 +78,7 @@ t_bool	philo_died(t_data *data, int id)
 {
 	long	time_now;
 
-	time_now = get_now(&data->time_value);
+	time_now = get_now();
 	if ((time_now - data->philos[id].last_eat) > data->time_to_die)
 		return (TRUE);
 	return (FALSE);

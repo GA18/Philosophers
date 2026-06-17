@@ -6,7 +6,7 @@
 /*   By: g-alves- <g-alves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/13 18:02:42 by g-alves-          #+#    #+#             */
-/*   Updated: 2026/06/17 09:09:04 by g-alves-         ###   ########.fr       */
+/*   Updated: 2026/06/17 09:51:33 by g-alves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_data	*parser_philo(t_data *data, int argc, char **argv)
 		data->must_eat = ft_atoi((const char *)argv[5]);
 	else
 		data->must_eat = 0;
-	data->start_time = get_now(&data->time_value);
+	data->start_time = get_now();
 	data->end_simulation = FALSE;
 	return (data);
 }
@@ -46,7 +46,7 @@ t_data	*init_philo(t_data *data, unsigned long size)
 	{
 		data->philos[index_id].id = index_id;
 		data->philos[index_id].count_eat = 0;
-		data->philos[index_id].last_eat = get_now(&data->time_value);
+		data->philos[index_id].last_eat = get_now();
 		data->philos[index_id].left_hand = index_id;
 		data->philos[index_id].right_hand
 			= (size + (index_id - 1)) % size;

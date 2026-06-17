@@ -6,7 +6,7 @@
 /*   By: g-alves- <g-alves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 16:46:40 by g-alves-          #+#    #+#             */
-/*   Updated: 2026/06/17 09:00:39 by g-alves-         ###   ########.fr       */
+/*   Updated: 2026/06/17 09:51:49 by g-alves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_data
 	t_bool			end_simulation;
 	int				all_satisfied;
 	long			start_time;
-	struct timeval	time_value;
 
 	pthread_mutex_t	action_lock;
 	pthread_mutex_t	*forks;
@@ -65,8 +64,8 @@ t_data			*init_philo(t_data *data, unsigned long size);
 unsigned long	ft_atoi(const char *nptr);
 void			start_simulation(t_data *data);
 void			cleanup(t_data *data);
-long			get_now(struct timeval *time_value);
-void			ft_usleep(struct timeval *time_value, long ms);
+long			get_now(void);
+void			ft_usleep(long ms);
 int				eating(t_philo *philo);
 int				sleeping(t_philo *philo);
 void			check_simulation(t_data *data);

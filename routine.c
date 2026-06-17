@@ -6,7 +6,7 @@
 /*   By: g-alves- <g-alves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 12:30:04 by g-alves-          #+#    #+#             */
-/*   Updated: 2026/06/17 09:30:44 by g-alves-         ###   ########.fr       */
+/*   Updated: 2026/06/17 11:22:11 by g-alves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*routine(void *ptr)
 
 	philo = ptr;
 	if ((philo[philo->id].id % 2) == 0)
-		ft_usleep(&philo->data->time_value, 1000);
+		ft_usleep(10);
 	while (philo->data->end_simulation == FALSE)
 	{
 		if (eating(philo))
@@ -33,35 +33,47 @@ void	*routine(void *ptr)
 
 int	eating(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->data->forks[philo->left_hand]);
-	pthread_mutex_lock(&philo->data->forks[philo->right_hand]);
-	philo->last_eat = get_now(&philo->data->time_value);
-	pthread_mutex_lock(&philo->data->action_lock);
-	printf("%ld %i is eating\n",
-		philo->last_eat - philo->data->start_time, philo->id);
-	pthread_mutex_unlock(&philo->data->action_lock);
-	ft_usleep(&philo->data->time_value, philo->data->time_to_eat);
-	philo->count_eat += 1;
-	pthread_mutex_unlock(&philo->data->forks[philo->right_hand]);
-	pthread_mutex_unlock(&philo->data->forks[philo->left_hand]);
-	return (0);
+	if (philo->data->end_simulation == FALSE)
+	{
+		pthread_mutex_lock(&philo->data->forks[philo->left_hand]);
+		pthread_mutex_lock(&philo->data->forks[philo->right_hand]);
+		philo->last_eat = get_now();
+		pthread_mutex_lock(&philo->data->action_lock);
+		printf("%ld %i is eating\n",
+			philo->last_eat - philo->data->start_time, philo->id);
+		pthread_mutex_unlock(&philo->data->action_lock);
+		ft_usleep(philo->data->time_to_eat);
+		philo->count_eat += 1;
+		pthread_mutex_unlock(&philo->data->forks[philo->right_hand]);
+		pthread_mutex_unlock(&philo->data->forks[philo->left_hand]);
+		return (0);
+	}
+	return (1);
 }
 
 int	sleeping(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->data->action_lock);
-	printf("%ld %i is sleeping\n",
-		get_now(&philo->data->time_value) - philo->data->start_time, philo->id);
-	pthread_mutex_unlock(&philo->data->action_lock);
-	ft_usleep(&philo->data->time_value, philo->data->time_to_sleep);
-	return (0);
+	if (philo->data->end_simulation == FALSE)
+	{
+		pthread_mutex_lock(&philo->data->action_lock);
+		printf("%ld %i is sleeping\n",
+			get_now() - philo->data->start_time, philo->id);
+		pthread_mutex_unlock(&philo->data->action_lock);
+		ft_usleep(philo->data->time_to_sleep);
+		return (0);
+	}
+	return (1);
 }
 
 int	thinking(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->data->action_lock);
-	printf("%ld %i is thinking\n",
-		get_now(&philo->data->time_value) - philo->data->start_time, philo->id);
-	pthread_mutex_unlock(&philo->data->action_lock);
-	return (0);
+	if (philo->data->end_simulation == FALSE)
+	{
+		pthread_mutex_lock(&philo->data->action_lock);
+		printf("%ld %i is thinking\n",
+			get_now() - philo->data->start_time, philo->id);
+		pthread_mutex_unlock(&philo->data->action_lock);
+		return (0);
+	}
+	return (1);
 }
