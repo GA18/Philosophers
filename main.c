@@ -6,7 +6,7 @@
 /*   By: g-alves- <g-alves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 16:50:03 by g-alves-          #+#    #+#             */
-/*   Updated: 2026/06/17 11:09:47 by g-alves-         ###   ########.fr       */
+/*   Updated: 2026/06/17 16:56:17 by g-alves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	check_simulation(t_data *data)
 {
 	int	id;
 
-	id = 0;
 	while (!data->end_simulation)
 	{
 		id = 0;
@@ -59,14 +58,16 @@ void	check_simulation(t_data *data)
 			pthread_mutex_lock(&data->action_lock);
 			if (philo_died(data, id))
 			{
-				printf("%ld %i died\n",
-					get_now() - data->start_time, id);
+				printf("%ld %i died\n", get_now() - data->start_time, id);
 				data->end_simulation = TRUE;
 				pthread_mutex_unlock(&data->action_lock);
 				break ;
 			}
 			if (is_satisfied(data, id))
+			{
+				pthread_mutex_unlock(&data->action_lock);
 				break ;
+			}
 			id++;
 			pthread_mutex_unlock(&data->action_lock);
 		}
