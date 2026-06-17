@@ -6,7 +6,7 @@
 /*   By: g-alves- <g-alves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 16:46:40 by g-alves-          #+#    #+#             */
-/*   Updated: 2026/06/17 08:48:16 by g-alves-         ###   ########.fr       */
+/*   Updated: 2026/06/17 09:00:39 by g-alves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_data
 	t_philo			*philos;
 
 	t_bool			end_simulation;
-	t_bool			all_satisfied;
+	int				all_satisfied;
 	long			start_time;
 	struct timeval	time_value;
 

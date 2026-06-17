@@ -6,7 +6,7 @@
 /*   By: g-alves- <g-alves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/13 18:02:42 by g-alves-          #+#    #+#             */
-/*   Updated: 2026/06/17 08:54:23 by g-alves-         ###   ########.fr       */
+/*   Updated: 2026/06/17 09:09:04 by g-alves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_data	*parser_philo(t_data *data, int argc, char **argv)
 
 t_data	*init_philo(t_data *data, unsigned long size)
 {
-	int	index_id;
+	unsigned long	index_id;
 
 	data = malloc(sizeof(t_data));
 	memset(data, 0, sizeof(t_data));
