@@ -6,7 +6,7 @@
 /*   By: g-alves- <g-alves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 16:50:03 by g-alves-          #+#    #+#             */
-/*   Updated: 2026/06/17 16:56:17 by g-alves-         ###   ########.fr       */
+/*   Updated: 2026/06/17 19:38:24 by g-alves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	main(int argc, char **argv)
 	if (argc < 5 || argc > 6)
 		return (1);
 	data = parser_philo(data, argc, argv);
-	printf("Iniciando Threads\n");
 	start_simulation(data);
 	cleanup(data);
 	return (0);

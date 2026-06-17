@@ -6,7 +6,7 @@
 /*   By: g-alves- <g-alves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 09:34:59 by g-alves-          #+#    #+#             */
-/*   Updated: 2026/06/17 11:09:39 by g-alves-         ###   ########.fr       */
+/*   Updated: 2026/06/17 18:00:25 by g-alves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ void	ft_usleep(long ms)
 
 	start = get_now();
 	while ((get_now() - start) < ms)
-		usleep(10);
+		usleep(1);
 }

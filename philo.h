@@ -6,7 +6,7 @@
 /*   By: g-alves- <g-alves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 16:46:40 by g-alves-          #+#    #+#             */
-/*   Updated: 2026/06/17 09:51:49 by g-alves-         ###   ########.fr       */
+/*   Updated: 2026/06/17 19:36:35 by g-alves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,19 @@ typedef enum e_bool
 	FALSE,
 	TRUE,
 }	t_bool;
+
+typedef enum e_flags
+{
+	ACTION = 1 << 0,
+	LEFT_HAND = 1 << 1,
+	RIGHT_HAND = 1 << 2,
+}	t_flags;
+
+typedef enum e_type
+{
+	LOCK,
+	UNLOCK,
+}	t_type;
 
 typedef struct s_philo
 {
@@ -73,6 +86,7 @@ int				thinking(t_philo *philo);
 t_bool			philo_died(t_data *data, int id);
 void			*routine(void *ptr);
 t_bool			is_satisfied(t_data *data, int id);
-
+void			lock_action(t_philo *philo, unsigned int flags,
+					unsigned int type);
 
 #endif
