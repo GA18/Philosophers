@@ -6,7 +6,7 @@
 /*   By: g-alves- <g-alves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 16:50:03 by g-alves-          #+#    #+#             */
-/*   Updated: 2026/06/17 19:38:24 by g-alves-         ###   ########.fr       */
+/*   Updated: 2026/06/17 19:47:53 by g-alves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,47 +55,10 @@ void	check_simulation(t_data *data)
 		while (id < data->number_of_philosophers)
 		{
 			pthread_mutex_lock(&data->action_lock);
-			if (philo_died(data, id))
-			{
-				printf("%ld %i died\n", get_now() - data->start_time, id);
-				data->end_simulation = TRUE;
-				pthread_mutex_unlock(&data->action_lock);
-				break ;
-			}
-			if (is_satisfied(data, id))
-			{
-				pthread_mutex_unlock(&data->action_lock);
-				break ;
-			}
-			id++;
+			type_end_simulation(data, id);
 			pthread_mutex_unlock(&data->action_lock);
+			id++;
 		}
 		ft_usleep(10);
 	}
-}
-
-t_bool	philo_died(t_data *data, int id)
-{
-	long	time_now;
-
-	time_now = get_now();
-	if ((time_now - data->philos[id].last_eat) > data->time_to_die)
-		return (TRUE);
-	return (FALSE);
-}
-
-t_bool	is_satisfied(t_data *data, int id)
-{
-	if (data->must_eat)
-	{
-		if (data->philos[id].count_eat >= data->must_eat
-			&& !data->philos[id].satisfied)
-		{
-			data->philos[id].satisfied = TRUE;
-			data->all_satisfied += 1;
-		}
-		if (data->all_satisfied == data->number_of_philosophers)
-			return (TRUE);
-	}
-	return (FALSE);
 }

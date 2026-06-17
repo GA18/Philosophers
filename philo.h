@@ -6,7 +6,7 @@
 /*   By: g-alves- <g-alves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 16:46:40 by g-alves-          #+#    #+#             */
-/*   Updated: 2026/06/17 19:36:35 by g-alves-         ###   ########.fr       */
+/*   Updated: 2026/06/17 19:51:59 by g-alves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,13 @@ typedef enum e_type
 	LOCK,
 	UNLOCK,
 }	t_type;
+
+typedef enum e_end
+{
+	DEATH,
+	CONTINUE,
+	SATISFIED,
+}	t_end;
 
 typedef struct s_philo
 {
@@ -88,5 +95,6 @@ void			*routine(void *ptr);
 t_bool			is_satisfied(t_data *data, int id);
 void			lock_action(t_philo *philo, unsigned int flags,
 					unsigned int type);
+int				type_end_simulation(t_data *data, int id);
 
 #endif

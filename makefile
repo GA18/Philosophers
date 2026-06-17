@@ -10,6 +10,7 @@ SRCS = main.c \
 	   routine.c \
 	   time.c \
 	   cleanup.c \
+	   utils.c \
 
 OBJ_DIR = obj
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
