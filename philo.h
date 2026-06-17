@@ -6,7 +6,7 @@
 /*   By: g-alves- <g-alves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 16:46:40 by g-alves-          #+#    #+#             */
-/*   Updated: 2026/06/16 18:28:41 by g-alves-         ###   ########.fr       */
+/*   Updated: 2026/06/17 08:48:16 by g-alves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_philo
 	int				right_hand;
 	int				count_eat;
 	long			last_eat;
+	t_bool			satisfied;
 
 	pthread_t		thread;
 	t_data			*data;
@@ -51,6 +52,7 @@ typedef struct s_data
 	t_philo			*philos;
 
 	t_bool			end_simulation;
+	t_bool			all_satisfied;
 	long			start_time;
 	struct timeval	time_value;
 
@@ -71,6 +73,7 @@ void			check_simulation(t_data *data);
 int				thinking(t_philo *philo);
 t_bool			philo_died(t_data *data, int id);
 void			*routine(void *ptr);
+t_bool			is_satisfied(t_data *data, int id);
 
 
 #endif

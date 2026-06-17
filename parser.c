@@ -6,7 +6,7 @@
 /*   By: g-alves- <g-alves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/13 18:02:42 by g-alves-          #+#    #+#             */
-/*   Updated: 2026/06/16 18:34:23 by g-alves-         ###   ########.fr       */
+/*   Updated: 2026/06/17 08:54:23 by g-alves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ t_data	*parser_philo(t_data *data, int argc, char **argv)
 	data->time_to_eat = ft_atoi((const char *)argv[3]);
 	data->time_to_sleep = ft_atoi((const char *)argv[4]);
 	if (argc == 6)
-		data->must_eat
-			= ft_atoi((const char *)argv[5]);
+		data->must_eat = ft_atoi((const char *)argv[5]);
+	else
+		data->must_eat = 0;
 	data->start_time = get_now(&data->time_value);
 	data->end_simulation = FALSE;
 	return (data);
@@ -50,6 +51,7 @@ t_data	*init_philo(t_data *data, unsigned long size)
 		data->philos[index_id].right_hand
 			= (size + (index_id - 1)) % size;
 		data->philos[index_id].data = data;
+		data->philos[index_id].satisfied = FALSE;
 		pthread_mutex_init(&data->forks[index_id], NULL);
 		index_id++;
 	}
