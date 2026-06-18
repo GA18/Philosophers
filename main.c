@@ -6,7 +6,7 @@
 /*   By: g-alves- <g-alves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 16:50:03 by g-alves-          #+#    #+#             */
-/*   Updated: 2026/06/17 19:47:53 by g-alves-         ###   ########.fr       */
+/*   Updated: 2026/06/17 20:38:05 by g-alves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,14 @@ void	check_simulation(t_data *data)
 		while (id < data->number_of_philosophers)
 		{
 			pthread_mutex_lock(&data->action_lock);
-			type_end_simulation(data, id);
+			if (type_end_simulation(data, id) & (DEATH | SATISFIED))
+			{
+				pthread_mutex_unlock(&data->action_lock);
+				break ;
+			}
 			pthread_mutex_unlock(&data->action_lock);
 			id++;
 		}
-		ft_usleep(10);
+		ft_usleep(1);
 	}
 }

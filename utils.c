@@ -6,7 +6,7 @@
 /*   By: g-alves- <g-alves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/17 19:46:03 by g-alves-          #+#    #+#             */
-/*   Updated: 2026/06/17 19:52:12 by g-alves-         ###   ########.fr       */
+/*   Updated: 2026/06/17 20:35:04 by g-alves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_bool	is_satisfied(t_data *data, int id)
 		{
 			data->philos[id].satisfied = TRUE;
 			data->all_satisfied += 1;
+			data->end_simulation = TRUE;
 		}
 		if (data->all_satisfied == data->number_of_philosophers)
 			return (TRUE);

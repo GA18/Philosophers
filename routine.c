@@ -6,7 +6,7 @@
 /*   By: g-alves- <g-alves-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 12:30:04 by g-alves-          #+#    #+#             */
-/*   Updated: 2026/06/17 19:29:35 by g-alves-         ###   ########.fr       */
+/*   Updated: 2026/06/17 21:06:51 by g-alves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ void	*routine(void *ptr)
 int	eating(t_philo *philo)
 {
 	lock_action(philo, (RIGHT_HAND | LEFT_HAND | ACTION), LOCK);
+	pthread_mutex_lock(&philo->data->action_lock);
+	//pthread_mutex_lock(&philo->data->forks[]);
+	pthread_mutex_lock(&philo->data->action_lock);
 	if (philo->data->end_simulation == FALSE)
 	{
 		philo->last_eat = get_now();
@@ -82,7 +85,8 @@ int	thinking(t_philo *philo)
 	{
 		lock_action(philo, ACTION, UNLOCK);
 		return (1);
-	}	
+	}
+	ft_usleep(5);
 	lock_action(philo, ACTION, UNLOCK);
 	return (0);
 }
